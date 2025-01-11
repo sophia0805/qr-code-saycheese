@@ -1,21 +1,12 @@
 body {
-    background: #000;
-    color: #fff;
+    background: #f1f5f9;
     margin: 0;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: monospace;
-    overflow: hidden;
-}
-
-.controls {
-    margin: 20px;
-    padding: 10px;
-    background: #333;
-    border-radius: 5px;
-    display: flex;
-    gap: 10px;
+    font-family: system-ui, -apple-system, sans-serif;
+    padding: 20px;
 }
 
 #created-container {
@@ -27,18 +18,112 @@ body {
     white-space: pre;
     margin: 0;
     padding: 0;
+    width: 100%;
+    max-width: 70vw;
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+    place-items: center;
 }
 
 #created-container.emoji-mode {
-    font-size: 5px;
+    font-size: 4px;
+}
+
+.progress-bar {
+    width: 100%;
+    max-width: 800px;
+    height: 4px;
+    background: #e2e8f0;
+    border-radius: 2px;
+    margin: 12px 0;
+    overflow: hidden;
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background: #ef4444;
+    transition: width 0.1s;
+}
+
+.controls {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+#file-input {
+    position: relative;
+    background: #dbeafe;
+    color: #1e3a8a;
+    border: none;
+    border-radius: 9999px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+#file-input::-webkit-file-upload-button {
+    visibility: hidden;
+    width: 0;
+}
+
+#file-input::before {
+    content: 'Choose File:';
+    display: inline-block;
+    cursor: pointer;
+}
+
+button {
+    background: #dbeafe;
+    color: #1e3a8a;
+    border: none;
+    border-radius: 9999px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background: #bfdbfe;
+}
+
+#emoji-input {
+    width: 40px;
+    background: #dbeafe;
+    color: #1e3a8a;
+    border: none;
+    border-radius: 9999px;
+    padding: 8px 16px;
+    font-size: 14px;
+    text-align: center;
 }
 
 #video {
     display: none;
 }
 
-input, button {
-    border-radius: 5vh;
-    height: 5vh;
-    font-size: 3vh;
+#play-btn {
+    margin-left: auto;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    
+    .controls {
+        flex-wrap: wrap;
+    }
+    
+    #play-btn {
+        margin-left: 0;
+    }
 }

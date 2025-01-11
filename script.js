@@ -5,11 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const emoji = document.getElementById('emoji-btn');
     const emojiInput = document.getElementById('emoji-input');
     const playBtn = document.getElementById('play-btn');
-
+    const progress = document.querySelector('.progress');
     const ASCII_CHARS = ["@", "#", "S", "%", "?", "*", "+", ";", ":", ",", " "].reverse();
     
     const state = {
-        frameSize: 200,
+        frameSize: 240,
         isPlaying: false,
         ascii: false
     };
@@ -38,10 +38,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (state.ascii) {
                     frame += getAsciiCharacter(gray);
                 } else {
-                    if (gray < 0.5){
+                    if (gray > 0.7){
                         frame += emojiInput.value.substring(0,2);
                     } else {
-                        frame += " ";
+                        frame += "  ";
                     }
                     
                 }
@@ -60,8 +60,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateCanvasSize() {
         const aspectRatio = video.videoHeight / video.videoWidth;
+        if (!state.ascii) {
+            canvas.height = Math.floor(state.frameSize * aspectRatio * 0.7);
+        } else {
+            canvas.height = Math.floor(state.frameSize * aspectRatio * 0.5);
+        }
         canvas.width = state.frameSize;
-        canvas.height = Math.floor(state.frameSize * aspectRatio * 0.7);
+
     }
 
     fileInput.addEventListener('change', (e) => {
@@ -104,7 +109,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     video.addEventListener('loadedmetadata', updateCanvasSize);
 
-    // Load default
+    video.addEventListener('timeupdate', () => {
+        const percent = (video.currentTime / video.duration) * 100;
+        progress.style.width = percent + '%';
+    });
+
+    //load default
     if (video.src === '') {
         video.src = 'BadApple.mp4';
         video.load();
