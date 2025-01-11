@@ -5,8 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const emoji = document.getElementById('emoji-btn');
     const emojiInput = document.getElementById('emoji-input');
     const playBtn = document.getElementById('play-btn');
-    const progress = document.querySelector('.progress');
-    
+
     const ASCII_CHARS = ["@", "#", "S", "%", "?", "*", "+", ";", ":", ",", " "].reverse();
     
     const state = {
@@ -72,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
             video.src = url;
             video.load();
         }
-        filename.textContent = file.name;
     });
 
     playBtn.addEventListener('click', () => {
@@ -106,12 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     video.addEventListener('loadedmetadata', updateCanvasSize);
 
-    video.addEventListener('timeupdate', () => {
-        const percent = (video.currentTime / video.duration) * 100;
-        progress.style.width = percent + '%';
-    });
-
-    //load default
+    // Load default
     if (video.src === '') {
         video.src = 'BadApple.mp4';
         video.load();
