@@ -9,7 +9,7 @@ body {
     overflow: hidden;
 }
 
-#controls {
+.controls {
     margin: 20px;
     padding: 10px;
     background: #333;
@@ -29,6 +29,16 @@ body {
     padding: 0;
 }
 
+#created-container.emoji-mode {
+    font-size: 5px;
+}
+
 #video {
     display: none;
+}
+
+input, button {
+    border-radius: 5vh;
+    height: 5vh;
+    font-size: 3vh;
 }
