@@ -47,6 +47,9 @@ body {
     transition: width 0.1s;
 }
 
+.file {
+    padding-right: 2vw;
+}
 .controls {
     width: 100%;
     max-width: 800px;
@@ -56,7 +59,7 @@ body {
     margin-top: 12px;
 }
 
-#file-input {
+label {
     position: relative;
     background: #dbeafe;
     color: #1e3a8a;
@@ -64,19 +67,12 @@ body {
     border-radius: 9999px;
     padding: 8px 16px;
     font-size: 14px;
-    font-weight: 500;
     cursor: pointer;
 }
 
-#file-input::-webkit-file-upload-button {
+label::-webkit-file-upload-button {
     visibility: hidden;
     width: 0;
-}
-
-#file-input::before {
-    content: 'Choose File:';
-    display: inline-block;
-    cursor: pointer;
 }
 
 button {
@@ -86,7 +82,6 @@ button {
     border-radius: 9999px;
     padding: 8px 16px;
     font-size: 14px;
-    font-weight: 500;
     cursor: pointer;
     transition: background-color 0.2s;
 }

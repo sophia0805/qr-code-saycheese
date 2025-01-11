@@ -13,7 +13,10 @@
             <div class="progress"></div>
         </div>
         <div class="controls">
-            <input type="file" id="file-input" accept="video/*">
+            <div class="file">
+                <input type="file" id="file-input" accept="video/*" style="display:none;">
+                <label for="file-input" id="label">Choose File: BadApple.mp4</label>
+            </div>
             <button id='emoji-btn'>Emoji</button>
             <input type="text" id="emoji-input" value="🍎">
             <button id="play-btn">Play</button>

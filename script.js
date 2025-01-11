@@ -5,11 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const emoji = document.getElementById('emoji-btn');
     const emojiInput = document.getElementById('emoji-input');
     const playBtn = document.getElementById('play-btn');
+    const label = document.getElementById('label');
+
     const progress = document.querySelector('.progress');
+
     const ASCII_CHARS = ["@", "#", "S", "%", "?", "*", "+", ";", ":", ",", " "].reverse();
     
     const state = {
-        frameSize: 240,
+        frameSize: window.innerWidth*0.15,
         isPlaying: false,
         ascii: false
     };
@@ -71,6 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fileInput.addEventListener('change', (e) => {
         const file = e.target.files[0];
+
+        label.textContent = "Choose File: " + file.name;
         if (file) {
             const url = URL.createObjectURL(file);
             video.src = url;
