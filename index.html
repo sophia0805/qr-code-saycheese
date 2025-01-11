@@ -3,117 +3,75 @@
     <head>
         <title>Bad Apple</title>
         <style>
-            body {
-                background: #f1f5f9;
-                margin: 0;
-                min-height: 100vh;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                font-family: system-ui, -apple-system, sans-serif;
-                padding: 20px;
-            }
-            #created-container {
-                background: #000;
-                color: #fff;
-                font-size: 8px;
-                line-height: 8px;
-                letter-spacing: 1px;
-                white-space: pre;
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                max-width: 70vw;
-                border-radius: 8px;
-                overflow: hidden;
-                aspect-ratio: 16/9;
-                place-items: center;
-            }
-            #created-container.emoji-mode {
-                font-size: 4px;
-            }
-            .progress-bar {
-                width: 100%;
-                max-width: 800px;
-                height: 4px;
-                background: #e2e8f0;
-                border-radius: 2px;
-                margin: 12px 0;
-                overflow: hidden;
-            }
-            .progress {
-                width: 0%;
-                height: 100%;
-                background: #ef4444;
-                transition: width 0.1s;
-            }
-            .file {
-                padding-right: 2vw;
-            }
-            .controls {
-                width: 100%;
-                max-width: 800px;
-                display: flex;
-                align-items: center;
-                gap: 12px;
-                margin-top: 12px;
-            }
-            label {
-                position: relative;
-                background: #dbeafe;
-                color: #1e3a8a;
-                border: none;
-                border-radius: 9999px;
-                padding: 8px 16px;
-                font-size: 14px;
-                cursor: pointer;
-            }
-            label::-webkit-file-upload-button {
-                visibility: hidden;
-                width: 0;
-            }
-            button {
-                background: #dbeafe;
-                color: #1e3a8a;
-                border: none;
-                border-radius: 9999px;
-                padding: 8px 16px;
-                font-size: 14px;
-                cursor: pointer;
-                transition: background-color 0.2s;
-            }
-            button:hover {
-                background: #bfdbfe;
-            }
-            #emoji-input {
-                width: 40px;
-                background: #dbeafe;
-                color: #1e3a8a;
-                border: none;
-                border-radius: 9999px;
-                padding: 8px 16px;
-                font-size: 14px;
-                text-align: center;
-            }
-            #video {
-                display: none;
-            }
-            #play-btn {
-                margin-left: auto;
-            }
-            @media (max-width: 600px) {
-                body {
-                    padding: 10px;
-                }
-                
-                .controls {
-                    flex-wrap: wrap;
-                }
-                
-                #play-btn {
-                    margin-left: 0;
-                }
-            }
+        body {
+            background: #f1f5f9;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: system-ui, -apple-system, sans-serif;
+            padding: 20px;
+        }
+        #created-container {
+            background: #000;
+            color: #fff;
+            font-size: 8px;
+            line-height: 8px;
+            letter-spacing: 1px;
+            white-space: pre;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            max-width: 70vw;
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            place-items: center;
+        }
+        #created-container.emoji-mode { font-size: 4px; }
+        .progress-bar {
+            width: 100%;
+            max-width: 800px;
+            height: 4px;
+            background: #e2e8f0;
+            border-radius: 2px;
+            margin: 12px 0;
+        }
+        .progress {
+            width: 0;
+            height: 100%;
+            background: #ef4444;
+            transition: width 0.1s;
+        }
+        .controls {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 12px;
+        }
+        label, button, #emoji-input {
+            background: #dbeafe;
+            color: #1e3a8a;
+            border: none;
+            border-radius: 9999px;
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        label { cursor: pointer; }
+        label::-webkit-file-upload-button { visibility: hidden; width: 0; }
+        button:hover { background: #bfdbfe; }
+        #emoji-input { width: 40px; text-align: center; }
+        #video { display: none; }
+        #play-btn { margin-left: auto; }
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .controls { flex-wrap: wrap; }
+            #play-btn { margin-left: 0; }
+        }
         </style>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -134,7 +92,6 @@
             <button id="play-btn">Play</button>
         </div>
         <script>
-            document.addEventListener('DOMContentLoaded', () => {
                 const video = document.getElementById('video');
                 const container = document.getElementById('created-container');
                 const fileInput = document.getElementById('file-input');
@@ -144,16 +101,10 @@
                 const label = document.getElementById('label');
                 const progress = document.querySelector('.progress');
                 const ASCII_CHARS = ["@", "#", "S", "%", "?", "*", "+", ";", ":", ",", " "].reverse();
-                const state = {
-                    frameSize: window.innerWidth*0.15,
-                    isPlaying: false,
-                    ascii: false
-                };
+                const state = {frameSize: window.innerWidth*0.15, isPlaying: false, ascii: false};
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d', { willReadFrequently: true });
-                function getAsciiCharacter(value) {
-                    return ASCII_CHARS[Math.floor(value / 256 * ASCII_CHARS.length)];
-                }
+                function getAsciiCharacter(value) { return ASCII_CHARS[Math.floor(value / 256 * ASCII_CHARS.length)]; }
                 function processFrame() {
                     if (!state.isPlaying) return;
                     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -167,11 +118,7 @@
                             if (state.ascii) {
                                 frame += getAsciiCharacter(gray);
                             } else {
-                                if (gray > 0.7){
-                                    frame += emojiInput.value.substring(0,2);
-                                } else {
-                                    frame += "  ";
-                                }
+                                gray > 0.7 ? frame += emojiInput.value.substring(0,2) : frame += "  ";
                             }
                         }
                         frame += '\n';
@@ -186,17 +133,11 @@
                 }
                 function updateCanvasSize() {
                     const aspectRatio = video.videoHeight / video.videoWidth;
-                    if (!state.ascii) {
-                        canvas.height = Math.floor(state.frameSize * aspectRatio * 0.7);
-                    } else {
-                        canvas.height = Math.floor(state.frameSize * aspectRatio * 0.5);
-                    }
+                    canvas.height = state.ascii ? canvas.height = Math.floor(state.frameSize * aspectRatio * 0.5) : canvas.height = Math.floor(state.frameSize * aspectRatio * 0.7)
                     canvas.width = state.frameSize;
-
                 }
                 fileInput.addEventListener('change', (e) => {
                     const file = e.target.files[0];
-
                     label.textContent = "Choose File: " + file.name;
                     if (file) {
                         const url = URL.createObjectURL(file);
@@ -205,10 +146,6 @@
                     }
                 });
                 playBtn.addEventListener('click', () => {
-                    if (!video.src) {
-                        alert('Please select a video file first');
-                        return;
-                    }
                     if (state.isPlaying) {
                         video.pause();
                         state.isPlaying = false;
@@ -224,11 +161,7 @@
                     state.ascii = !state.ascii;
                     emoji.textContent = state.ascii ? 'Ascii' : 'Emoji';
                     emojiInput.style.display = state.ascii ? 'none' : 'block';
-                    if (state.ascii) {
-                        container.classList.remove('emoji-mode'); 
-                    } else {
-                        container.classList.add('emoji-mode');
-                    }
+                    state.ascii ? container.classList.remove('emoji-mode') : container.classList.add('emoji-mode');
                 });
                 video.addEventListener('loadedmetadata', updateCanvasSize);
                 video.addEventListener('timeupdate', () => {
@@ -241,7 +174,6 @@
                     video.load();
                 }
                 container.classList.add('emoji-mode');
-            });
         </script>
     </body>
 </html>
