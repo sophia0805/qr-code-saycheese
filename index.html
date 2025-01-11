@@ -156,11 +156,9 @@
                 }
                 function processFrame() {
                     if (!state.isPlaying) return;
-
                     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
                     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
                     const pixels = imageData.data;
-
                     let frame = '';
                     for (let i = 0; i < canvas.height; i++) {
                         for (let j = 0; j < canvas.width; j++) {
@@ -238,7 +236,7 @@
                     progress.style.width = percent + '%';
                 });
                 if (video.src === '') {
-                    video.src = 'BadApple.mp4';
+                    video.src = 'https://cloud-exq9ckhgy-hack-club-bot.vercel.app/2badapple.mp4';
                     video.load();
                 }
                 container.classList.add('emoji-mode');
