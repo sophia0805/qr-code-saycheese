@@ -120,8 +120,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     //load default
-    if (video.src === '') {
-        video.src = 'BadApple.mp4';
+    if (video.src===''){
+        video.setAttribute('crossOrigin','');
+        video.src='https://cloud-exq9ckhgy-hack-club-bot.vercel.app/2badapple.mp4';
         video.load();
     }
 
